@@ -24,9 +24,12 @@ public class JobController {
 
     @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job) {
-        jobService.createJob(job);
-
-        return new ResponseEntity<>("Job Created Successfully",HttpStatus.CREATED);
+        try{
+            jobService.createJob(job);
+            return new ResponseEntity<>("Job Created Successfully",HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>("Something went wrongz",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{id}")
@@ -37,12 +40,12 @@ public class JobController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteJob(@PathVariable Long id){
-        Job job = jobService.findJobById(id);
-        if(job == null){
-            return new ResponseEntity<>("Job you are trying to delete is not found", HttpStatus.NOT_FOUND);
+        boolean deleted = jobService.deleteJob(id);
+        System.out.println(deleted);
+        if(deleted){
+            return ResponseEntity.ok("Job Deleted Successfully");
         }
-        jobService.deleteJob(id);
-        return ResponseEntity.ok("Job Deleted Successfully") ;
+        return new ResponseEntity<>("Job Not Found", HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{id}")
