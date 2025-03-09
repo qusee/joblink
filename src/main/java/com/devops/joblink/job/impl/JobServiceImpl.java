@@ -35,12 +35,12 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean deleteJob(Long id) {
-        try {
+        Optional<Job> job = jobRepository.findById(id);
+        if (job.isPresent()) {
             jobRepository.deleteById(id);
             return true;
-        } catch (Exception e) {
-            return false;
         }
+        return false;
     }
 
     @Override

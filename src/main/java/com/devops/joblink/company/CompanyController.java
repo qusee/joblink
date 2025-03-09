@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("companies")
+@RequestMapping("/companies")
 public class CompanyController {
     private final CompanyService companyService;
 
@@ -28,6 +28,10 @@ public class CompanyController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Company> getCompany(@PathVariable Long id) {
+        Company company = companyService.findCompanyById(id);
+        if (company == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return ResponseEntity.ok(companyService.findCompanyById(id));
     }
 
