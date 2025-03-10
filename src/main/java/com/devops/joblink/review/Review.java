@@ -1,8 +1,10 @@
 package com.devops.joblink.review;
 
 import com.devops.joblink.company.Company;
+import jakarta.persistence.Entity;
 
 import java.util.Date;
+
 
 public class Review {
     private Long id;

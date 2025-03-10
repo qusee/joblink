@@ -1,7 +1,11 @@
 package com.devops.joblink.company;
 
 
+import com.devops.joblink.job.Job;
+import com.devops.joblink.review.Review;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Company {
@@ -15,6 +19,12 @@ public class Company {
     private String location;
     private String website;
 
+    @OneToMany
+    private List<Job> jobs;
+
+//    @OneToMany
+//    private List<Review> reviews;
+//
     public Company(Long id, String name, String industry, String location, String description, String website) {
         this.id = id;
         this.name = name;
