@@ -2,7 +2,7 @@ package com.devops.joblink.company;
 
 
 import com.devops.joblink.job.Job;
-import com.devops.joblink.review.Review;
+//import com.devops.joblink.review.Review;
 import jakarta.persistence.*;
 
 import java.util.List;

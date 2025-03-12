@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import org.springframework.context.annotation.Primary;
 
 @Entity
-// @Table(name = job_table)
 public class Job {
 
     @Id
