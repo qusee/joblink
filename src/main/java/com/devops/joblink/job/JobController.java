@@ -17,6 +17,12 @@ public class JobController {
         this.jobService = jobService;
     }
 
+    @GetMapping("/companies/{companyId}")
+    public ResponseEntity<List<Job>> findJobsByCompanyId(@PathVariable("companyId") long companyId) {
+        List<Job> jobs = jobService.findJobsByCompanyId(companyId);
+        return ResponseEntity.ok(jobs);
+    }
+
     @GetMapping
     public ResponseEntity<List<Job>> findAll(){
         return ResponseEntity.ok(jobService.findAll());

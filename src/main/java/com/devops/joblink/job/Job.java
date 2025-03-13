@@ -1,6 +1,8 @@
 package com.devops.joblink.job;
 
 
+import com.devops.joblink.company.Company;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Primary;
 
@@ -15,6 +17,18 @@ public class Job {
     private String minSalary;
     private String maxSalary;
     private String location;
+
+
+    @ManyToOne
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Job() {}
 

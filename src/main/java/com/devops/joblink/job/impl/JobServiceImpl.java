@@ -1,5 +1,6 @@
 package com.devops.joblink.job.impl;
 
+import com.devops.joblink.company.Company;
 import com.devops.joblink.job.Job;
 import com.devops.joblink.job.JobRepository;
 import com.devops.joblink.job.JobService;
@@ -25,6 +26,11 @@ public class JobServiceImpl implements JobService {
     @Override
     public Job findJobById(Long id) {
         return jobRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Job> findJobsByCompanyId(Long companyId) {
+        return jobRepository.findJobsByCompany_Id(companyId);
     }
 
 

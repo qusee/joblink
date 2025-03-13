@@ -51,6 +51,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public boolean deleteCompany(Long id) {
         Optional<Company> companyOptional = companyRepository.findById(id);
+        // First I need to check if there are any jobs that are linked to this company
         if (companyOptional.isPresent()) {
             companyRepository.deleteById(companyOptional.get().getId());
             return true;
