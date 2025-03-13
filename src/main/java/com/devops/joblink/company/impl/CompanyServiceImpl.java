@@ -3,17 +3,23 @@ package com.devops.joblink.company.impl;
 import com.devops.joblink.company.Company;
 import com.devops.joblink.company.CompanyRepository;
 import com.devops.joblink.company.CompanyService;
+import com.devops.joblink.job.Job;
+import com.devops.joblink.job.JobRepository;
+import com.devops.joblink.job.JobService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.jar.JarOutputStream;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
+    private final JobService jobService;
 
-    public CompanyServiceImpl(CompanyRepository companyRepository) {
+    public CompanyServiceImpl(CompanyRepository companyRepository, JobService jobService) {
         this.companyRepository = companyRepository;
+        this.jobService = jobService;
     }
 
 
@@ -52,7 +58,16 @@ public class CompanyServiceImpl implements CompanyService {
     public boolean deleteCompany(Long id) {
         Optional<Company> companyOptional = companyRepository.findById(id);
         // First I need to check if there are any jobs that are linked to this company
+
         if (companyOptional.isPresent()) {
+
+            Optional<List<Job>> optionalJobs = Optional.ofNullable(jobService.findJobsByCompanyId(id));
+            if(optionalJobs.isPresent()){
+                List<Job> jobs = optionalJobs.get();
+                for (Job job : jobs) {
+                    jobService.deleteJob(job.getId());
+                }
+            }
             companyRepository.deleteById(companyOptional.get().getId());
             return true;
         }
