@@ -1,10 +1,9 @@
 package com.devops.joblink.job.impl;
 
-import com.devops.joblink.company.Company;
+
 import com.devops.joblink.job.Job;
 import com.devops.joblink.job.JobRepository;
 import com.devops.joblink.job.JobService;
-import com.devops.joblink.review.Review;
 import org.springframework.stereotype.Service;
 
 

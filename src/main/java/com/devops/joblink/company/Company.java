@@ -2,7 +2,7 @@ package com.devops.joblink.company;
 
 
 import com.devops.joblink.job.Job;
-//import com.devops.joblink.review.Review;
+
 import com.devops.joblink.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -29,17 +29,6 @@ public class Company {
     @JsonIgnore
     @OneToMany(mappedBy = "company")
     private List<Review> reviews;
-
-
-
-    public Company(Long id, String name, String industry, String location, String description, String website) {
-        this.id = id;
-        this.name = name;
-        this.industry = industry;
-        this.location = location;
-        this.description = description;
-        this.website = website;
-    }
 
     public Company(Long id){this.id = id;}
 
@@ -87,11 +76,8 @@ public class Company {
         this.industry = industry;
     }
 
-    public List<Job> getJobs() {
-        return jobs;
-    }
+    public List<Job> getJobs() {return jobs;}
     public List<Review> getReviews() {return reviews;}
-
     public void setReviews(List<Review> reviews) {this.reviews = reviews;}
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;

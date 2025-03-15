@@ -3,10 +3,10 @@ package com.devops.joblink.company.impl;
 import com.devops.joblink.company.Company;
 import com.devops.joblink.company.CompanyRepository;
 import com.devops.joblink.company.CompanyService;
-import com.devops.joblink.job.Job;
+
 
 import com.devops.joblink.job.JobService;
-import com.devops.joblink.review.Review;
+
 
 import com.devops.joblink.review.ReviewService;
 

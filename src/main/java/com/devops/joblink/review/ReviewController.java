@@ -43,7 +43,7 @@ public class ReviewController {
 
     @PostMapping // Post review
     public ResponseEntity<String> addReview(@RequestBody Review review, @PathVariable Long companyId) {
-        boolean companyExists = companyService.isCompanyPresent(companyId);;
+        boolean companyExists = companyService.isCompanyPresent(companyId);
         if (!companyExists) {
             return new ResponseEntity<>("Company does not exist",HttpStatus.NOT_FOUND);
         }

@@ -1,8 +1,5 @@
 package com.devops.joblink.job;
 
-import com.devops.joblink.company.Company;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 
