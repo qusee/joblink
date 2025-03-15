@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -49,9 +50,16 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public boolean deleteReview(Long id) {
         if (reviewRepository.existsById(id)) {
+
             reviewRepository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void dropReviewsByCompanyId(Long companyId) {
+        List<Review> optionalReviews = getReviewsByCompanyId(companyId);
+        reviewRepository.deleteAllById(optionalReviews.stream().map(Review::getId).collect(Collectors.toList()));
     }
 }

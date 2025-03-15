@@ -30,6 +30,8 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Review> reviews;
 
+
+
     public Company(Long id, String name, String industry, String location, String description, String website) {
         this.id = id;
         this.name = name;
@@ -46,7 +48,6 @@ public class Company {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -54,7 +55,6 @@ public class Company {
     public String getLocation() {
         return location;
     }
-
     public void setLocation(String location) {
         this.location = location;
     }
@@ -62,7 +62,6 @@ public class Company {
     public String getWebsite() {
         return website;
     }
-
     public void setWebsite(String website) {
         this.website = website;
     }
@@ -70,7 +69,6 @@ public class Company {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -78,7 +76,6 @@ public class Company {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -86,7 +83,6 @@ public class Company {
     public String getIndustry() {
         return industry;
     }
-
     public void setIndustry(String industry) {
         this.industry = industry;
     }
@@ -94,7 +90,9 @@ public class Company {
     public List<Job> getJobs() {
         return jobs;
     }
+    public List<Review> getReviews() {return reviews;}
 
+    public void setReviews(List<Review> reviews) {this.reviews = reviews;}
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }

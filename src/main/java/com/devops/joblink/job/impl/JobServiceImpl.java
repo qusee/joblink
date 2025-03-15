@@ -4,11 +4,13 @@ import com.devops.joblink.company.Company;
 import com.devops.joblink.job.Job;
 import com.devops.joblink.job.JobRepository;
 import com.devops.joblink.job.JobService;
+import com.devops.joblink.review.Review;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -64,5 +66,11 @@ public class JobServiceImpl implements JobService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void deleteJobsByCompanyId(Long companyId) {
+        List<Job> optionalJobs = findJobsByCompanyId(companyId);
+        jobRepository.deleteAllById(optionalJobs.stream().map(Job::getId).collect(Collectors.toList()));
     }
 }

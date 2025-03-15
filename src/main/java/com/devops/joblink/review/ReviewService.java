@@ -8,4 +8,5 @@ public interface ReviewService {
     void createReview(Review review);
     boolean updateReview(Review review, Long id);
     boolean deleteReview(Long id);
+    void dropReviewsByCompanyId(Long companyId);
 }
