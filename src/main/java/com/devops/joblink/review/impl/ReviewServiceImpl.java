@@ -36,11 +36,11 @@ public class ReviewServiceImpl implements ReviewService {
     public boolean updateReview(Review review, Long id) {
         Optional<Review> optionalReview = reviewRepository.findById(id);
         if (optionalReview.isPresent()) {
-            Review updatedReview = optionalReview.get();
-            updatedReview.setTitle(review.getTitle());
-            updatedReview.setDescription(review.getDescription());
-            updatedReview.setRating(review.getRating());
-            reviewRepository.save(updatedReview);
+            Review existingReview = optionalReview.get();
+            existingReview.setTitle(review.getTitle());
+            existingReview.setDescription(review.getDescription());
+            existingReview.setRating(review.getRating());
+            reviewRepository.save(existingReview);
             return true;
         }
         return false;
