@@ -1,6 +1,8 @@
 package com.devops.joblink.job;
 
 
+import com.devops.joblink.company.Company;
+import com.devops.joblink.company.CompanyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +14,19 @@ import java.util.List;
 @RequestMapping("/jobs")
 public class JobController {
     private final JobService jobService;
+    private final CompanyService companyService;
 
-    public JobController(JobService jobService) {
+    public JobController(JobService jobService, CompanyService companyService) {
         this.jobService = jobService;
+        this.companyService = companyService;
     }
 
     @GetMapping("/companies/{companyId}")
     public ResponseEntity<List<Job>> findJobsByCompanyId(@PathVariable("companyId") long companyId) {
+        boolean companyExists = companyService.isCompanyPresent(companyId);
+        if (!companyExists) {
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        }
         List<Job> jobs = jobService.findJobsByCompanyId(companyId);
         return ResponseEntity.ok(jobs);
     }
@@ -31,10 +39,14 @@ public class JobController {
     @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job) {
         try{
+            boolean isCompanyPresent = companyService.isCompanyPresent(job.getCompany().getId());
+            if (!isCompanyPresent) {
+                return new ResponseEntity<>("Company Not Found",HttpStatus.NOT_FOUND);
+            }
             jobService.createJob(job);
             return new ResponseEntity<>("Job Created Successfully",HttpStatus.CREATED);
         } catch (Exception e){
-            return new ResponseEntity<>("Something went wrongz",HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Something went wrong",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

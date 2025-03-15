@@ -72,4 +72,9 @@ public class CompanyServiceImpl implements CompanyService {
         }
         return false;
     }
+
+    @Override
+    public boolean isCompanyPresent(Long id) {
+        return companyRepository.existsById(id);
+    }
 }
