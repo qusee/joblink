@@ -58,10 +58,9 @@ public class CompanyServiceImpl implements CompanyService {
     public boolean deleteCompany(Long id) {
         Optional<Company> companyOptional = companyRepository.findById(id);
         // First I need to check if there are any jobs that are linked to this company
+        if (companyOptional.isPresent()) { // companyRepository.existsById(id);
 
-        if (companyOptional.isPresent()) {
-
-            Optional<List<Job>> optionalJobs = Optional.ofNullable(jobService.findJobsByCompanyId(id));
+            Optional<List<Job>> optionalJobs = Optional.ofNullable(companyOptional.get().getJobs());
             if(optionalJobs.isPresent()){
                 List<Job> jobs = optionalJobs.get();
                 for (Job job : jobs) {

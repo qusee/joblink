@@ -50,6 +50,6 @@ public class CompanyController {
         if(deleted){
             return ResponseEntity.ok("Company Deleted Successfully");
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Company Not Found ",HttpStatus.NOT_FOUND);
     }
 }

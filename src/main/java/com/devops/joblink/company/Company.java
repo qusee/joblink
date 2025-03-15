@@ -3,6 +3,7 @@ package com.devops.joblink.company;
 
 import com.devops.joblink.job.Job;
 //import com.devops.joblink.review.Review;
+import com.devops.joblink.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -20,14 +21,14 @@ public class Company {
     private String location;
     private String website;
 
-    // circular dependency causes recursion error/ stackoverflowerror
+    // circular dependency causes recursion error/ stackoverflow_error
     @JsonIgnore
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
-    //    @OneToMany
-//    private List<Review> reviews;
-//
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
 
     public Company(Long id, String name, String industry, String location, String description, String website) {
         this.id = id;
@@ -37,6 +38,9 @@ public class Company {
         this.description = description;
         this.website = website;
     }
+
+    public Company(Long id){this.id = id;}
+
     public Company() {}
 
     public String getDescription() {
