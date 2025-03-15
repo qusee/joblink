@@ -10,4 +10,5 @@ public interface CompanyService {
     void createCompany(Company company);
     boolean updateCompany(Long id, Company company);
     boolean deleteCompany(Long id);
+    boolean isCompanyPresent(Long id);
 }
