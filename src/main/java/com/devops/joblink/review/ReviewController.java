@@ -76,7 +76,7 @@ public class ReviewController {
             return new ResponseEntity<>("Company does not exist",HttpStatus.NOT_FOUND);
         }
 
-        boolean deleted = reviewService.deleteReview(id);
+        boolean deleted = reviewService.deleteReview(id, companyId);
         if (deleted) {
             return new ResponseEntity<>("Review Deleted", HttpStatus.OK);
         }

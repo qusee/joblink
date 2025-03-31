@@ -1,5 +1,6 @@
 package com.devops.joblink.review.impl;
 
+
 import com.devops.joblink.review.Review;
 import com.devops.joblink.review.ReviewRepository;
 import com.devops.joblink.review.ReviewService;
@@ -48,9 +49,9 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public boolean deleteReview(Long id) {
+    public boolean deleteReview(Long id, Long companyId) {
         if (reviewRepository.existsById(id)) {
-
+            Review review = getReviewById(id);
             reviewRepository.deleteById(id);
             return true;
         }
